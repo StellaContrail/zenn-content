@@ -65,7 +65,7 @@ $ uv add datasets requests pandas tqdm ragas langchain-openai python-dotenv time
 
 事前にナレッジベースにはドメインに応じたナレッジを登録してあり、知識検索ブロックでそれぞれのナレッジを参照するようにした。検索方法はハイブリッド検索で、"text-embedding-3-small" による埋め込みを実施。
 
-![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/3fba5e59-5bef-45dc-a669-c99656f013b4.png)
+![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_2.png)
 
 
 ## スクリプトの実装
@@ -219,11 +219,11 @@ OPENAI_API_KEY=<OpenAI API の API キー>
 
 `DIFY_API_KEY` は対象 Dify アプリを開き、画面左端メニューの「API アクセス」を選択する
 
-![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/9cea5bf1-5595-4a09-a07e-a46b0fe92902.png)
+![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_3.png)
 
 画面右上の「API キー」を押下して表示されるモーダルからキー発行できる
 
-![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/7cbbe416-48c1-4639-91e5-874d318decdf.png)
+![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_4.png)
 
 
 ## スクリプトの実行
