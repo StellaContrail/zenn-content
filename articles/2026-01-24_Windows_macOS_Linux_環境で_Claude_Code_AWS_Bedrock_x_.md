@@ -1,0 +1,122 @@
+---
+title: "Windows / macOS / Linux 環境で Claude Code (AWS Bedrock) x cc-sdd を使えるようにする"
+emoji: "☁️"
+type: "tech" # tech: 技術記事 / idea: アイデア
+topics: ["Mac","Windows","bedrock","ClaudeCode","cc-sdd"]
+published: true
+---
+
+# 前提条件
+> - Bedrockアクセスが有効になっているAWSアカウント
+> - Bedrockで目的のClaudeモデル（例：Claude Sonnet 4.5）へのアクセス
+> - AWS CLIがインストールおよび設定されている（オプション - 認証情報を取得する別のメカニズムがない場合のみ必要）
+> - 適切なIAM権限
+> 
+> https://code.claude.com/docs/ja/amazon-bedrock
+
+必要な IAM 権限は以下を参照してください。
+
+https://code.claude.com/docs/en/amazon-bedrock#iam-configuration
+
+# 導入手順
+1. Claude Code をインストールする
+2. cc-sdd をプロジェクトに導入する
+3. Claude Code の設定ファイル（settings.json）に AWS 認証とモデル情報をセットアップする
+
+## Step1. Claude Code インストール
+Claude Code を OS に合わせてインストールし、`claude --version` で導入確認します。
+
+### Windows 環境
+```powershell
+# Claude Code をインストール
+irm https://claude.ai/install.ps1 | iex
+
+# Claude Code が使えることを確認
+claude --version
+```
+
+### macOS / Linux 環境
+```zsh
+# Claude Code をインストール
+curl -fsSL https://claude.ai/install.sh | bash
+
+# Claude Code が使えることを確認
+claude --version
+```
+
+## Step2. cc-sdd インストール
+プロジェクトに cc-sdd をインストールし、プロジェクト内で仕様駆動開発（SDD）を進められるようにします。
+
+:::message alert
+CLAUDE.md は上書きされてしまうため、既にプロジェクトに配置されている場合はバックアップしておいてください。
+:::
+
+### Windows / macOS / Linux 環境
+```powershell
+# プロジェクトのフォルダに移動
+cd /path/to/your-project/
+
+# cc-sdd をプロジェクトにインストール
+npx cc-sdd@latest --claude --lang ja
+```
+
+## Step3. AWS Bedrock 連携
+Claude Code で AWS Bedrock のモデルを使えるようにするため、推論モデル名などの環境変数を設定します。
+
+下記ではユーザ単位の設定としていますが、プロジェクトルートに `.claude/settings.jso` を配置することでプロジェクト単位の設定にすることも可能です。
+
+### Windows 環境
+
+```powershell
+notepad "$HOME\.claude\settings.json"
+```
+
+### macOS / Linux 環境
+
+```zsh
+mkdir -p ~/.claude
+vi ~/.claude/settings.json
+```
+
+### JSON 設定内容（Windows / macOS / Linux 環境）
+`.claude` フォルダ配下の `settings.json` に以下の JSON 文を設定します。
+
+`ANTHROPIC_MODEL` には使用する推論モデル名を設定してください（ここでは Claude Sonnet 4.5 を設定）。
+
+```json
+{
+  "language": "日本語",
+  "awsAuthRefresh": "aws login --profile claude-code",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_REGION": "ap-northeast-1",
+    "AWS_PROFILE": "claude-code",
+    "ANTHROPIC_MODEL": "global.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "4096",
+    "MAX_THINKING_TOKENS": "1024"
+  }
+}
+```
+
+以下に記載がある環境変数も設定できます。
+
+https://code.claude.com/docs/ja/settings#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0
+
+#### 環境変数の説明
+
+| 変数名 | 説明 |
+| ---- | ---- |
+| CLAUDE_CODE_USE_BEDROCK | Bedrock を使用 |
+| AWS_REGION | AWS リージョン |
+| AWS_PROFILE | 使用する AWS 認証プロファイル |
+| ANTHROPIC_MODEL | 使用するモデル名（inference profile ID / application inference profile ID） |
+| CLAUDE_CODE_MAX_OUTPUT_TOKENS | リクエストの最大出力トークン数 |
+| MAX_THINKING_TOKENS | 拡張思考の最大トークン数 |
+
+
+# 参考文献
+https://github.com/gotalab/cc-sdd/
+
+https://code.claude.com/docs/en/amazon-bedrock
+
+https://qiita.com/tomada/items/6a04114fc41d0b86ffee
