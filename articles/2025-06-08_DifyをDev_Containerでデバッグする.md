@@ -11,15 +11,15 @@ published: true
 # 起動手順
 1. VSCode に [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) をインストールする
 
-   ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/5bb8b0d8-05e7-433c-bf74-f736159ea380.png)
+   ![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_7.png)
 
 1. `Shift + Ctrl + P` でコマンドパレットを開き、`Dev Containers: Open Folder in Container...` を選択する
 
-   ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/8c2ea0b8-4fb8-43fe-8248-2078e6b200ff.png)
+   ![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_8.png)
 
 1. Dify プロジェクトのルートディレクトリ（`dify`）を `Open` する
 
-   ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/b6871b61-02ba-4562-944c-13791bf7898a.png)
+   ![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_9.png)
 
    :::message alert
    構築途中、`.docker/buildx/current` で Permission Denied が発生する場合は
@@ -36,25 +36,25 @@ published: true
    :::
    
 1. ターミナルに "Done. Press any key to close the terminal." と出てきたら開発環境の構築が無事完了
-![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/1827e5ab-44a8-4fe3-a590-7e1ce97ccb6c.png)
+![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_10.png)
 1. デバッグに入るため、まずミドルウェアを起動する。ターミナルから `start-containers` コマンドを実行する
    
-   ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/e3aa6f83-c1d6-4dfc-a5fc-dda92b47175c.png)
+   ![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_11.png)
 
 1. VSCode からデバッグできるように、`launch.json` を `launch.json.template` からコピーして作る
 
-   ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/91de1311-9d42-470e-8247-5b6e9a40a22a.png)
+   ![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_12.png)
 
 1. VSCode の `Run and Debug` から、デバッグに必要なサービスを立ち上げる
     1. backend : `Python: Flask API` 
     1. frontend : `Next.js: debug full stack`
     1. async worker : `Python: Celery Worker (Solo)`
 
-    ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/7c123677-d230-4ea0-841f-0a48ca8ec047.png)
+    ![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_13.png)
 
 1. 後は通常のデバッグ作業のように、ブレイクポイントなどを設定してデバッグする
 
-   ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/568c6647-ec51-4573-952e-8b118436e7ac.png)
+   ![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_14.png)
 
    :::message alert
    frontend はホットリロードに対応しているので、変更が即時反映される
@@ -72,7 +72,7 @@ Microsoft が提唱した概念がゆえに、VSCode との相性が良い。
 
 より詳しくは [公式ウェブサイト](https://containers.dev/) へ。
 
-![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/27927/924c8f2c-d61a-464f-a511-0d223940bdbd.png)
+![image.png](https://raw.githubusercontent.com/StellaContrail/zenn-content/main/images/img_15.png)
 
 > This lets VS Code provide a local-quality development experience including full IntelliSense (completions), code navigation, and debugging regardless of where your tools (or code) are located.
 > 
